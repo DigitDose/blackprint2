@@ -1,0 +1,125 @@
+/* Import Tailwind CSS base styles */
+@tailwind base;
+/* Import Tailwind CSS components */
+@tailwind components;
+/* Import Tailwind CSS utilities */
+@tailwind utilities;
+
+/* Custom styles */
+:root {
+  /* Define your custom variables here */
+  --primary-color: #000;
+  --secondary-color: #ffffff;
+}
+body,
+html{
+  /* Use custom variables */
+  background: var(--primary-color);
+  color: white;
+  min-height: 99vh;
+}
+ul {
+  list-style-type: disc; /* Styl dla listy nieuporządkowanej (kropki) */
+  margin-left: 1.5rem;   /* Odstęp od lewej */
+  padding-left: 0;       /* W razie potrzeby, wyzerowanie paddingu */
+}
+
+ol {
+  list-style-type: decimal; /* Styl dla listy uporządkowanej (numery) */
+  margin-left: 1.5rem;      /* Odstęp od lewej */
+  padding-left: 0;          /* Wyzerowanie paddingu */
+}
+
+li {
+  margin-bottom: 0.5rem; /* Odstęp między elementami listy */
+}
+
+@media (max-width: 640px) {
+  :root{
+    /* Define your custom variables here */
+    --primary-color: #4f46e5;
+    --secondary-color: #ec4899;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 79, 70, 229;
+    --background-end-rgb: 236, 72, 153;
+  }
+  /* sm breakpoint styles go here */
+}
+/* Responsive design with Tailwind CSS */
+@media (min-width: 640px) {
+  :root{
+    /* Define your custom variables here */
+    --primary-color: #4f46e5;
+    --secondary-color: #ec4899;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 79, 70, 229;
+    --background-end-rgb: 236, 72, 153;
+  }
+  /* sm breakpoint styles go here */
+}
+@media (min-width: 768px) {
+  :root{
+    /* Define your custom variables here */
+    --primary-color: #0d00ff;
+    --secondary-color: #00ff15;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 79, 70, 229;
+    --background-end-rgb: 236, 72, 153;
+  }
+}
+@media (min-width: 1024px) { 
+   :root{
+    /* Define your custom variables here */
+    --primary-color: #ffc400;
+    --secondary-color: #ec4899;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 79, 70, 229;
+    --background-end-rgb: 236, 72, 153;
+  }
+}
+@media (min-width: 1280px) {
+  :root{
+    /* Define your custom variables here */
+    --primary-color: #4f46e5;
+    --secondary-color: #ec4899;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 79, 70, 229;
+    --background-end-rgb: 236, 72, 153;
+  }
+}
+@media (min-width: 1536px) {
+  /* 2xl breakpoint styles go here */
+
+
+:root {
+  /* Define your custom variables here */
+  --primary-color: #000;
+  --secondary-color: #ffffff;
+      --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 79, 70, 229;
+    --background-end-rgb: 236, 72, 153;
+    --spacing-lg:2rem;
+}
+
+ .parallax-background {                                                                                                                                                                     
+           /* The image used */                                                                                                                                                                     
+           background-image: url('/images/image1.jpg');                                                                                                                                        
+                                                                                                                                                                                                    
+           /* Set a specific height */                                                                                                                                                              
+           min-height: 100vh;                                                                                                                                                                       
+                                                                                                                                                                                                    
+           /* Create the parallax scrolling effect */                                                                                                                                               
+           background-attachment: fixed;                                                                                                                                                            
+           background-position: center;                                                                                                                                                             
+           background-repeat: no-repeat;                                                                                                                                                            
+           background-size: cover;                                                                                                                                                                  
+                                                                                                                                                                                                    
+           /* Blur and darken the background */                                                                                                                                                     
+           filter: blur(8px) brightness(50%);                                                                                                                                                       
+         }                                                                                                                                                                                          
+         .content {                                                                                                                                                                                 
+           /* Position the content in front of the background */                                                                                                                                    
+           position: relative;                                                                                                                                                                      
+           z-index: 1;                                                                                                                                                                              
+         }                                  
+}

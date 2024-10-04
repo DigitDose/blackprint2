@@ -1,0 +1,1 @@
+self.__INTERCEPTION_ROUTE_REWRITE_MANIFEST="[{\"source\":\"/gallery/:id\",\"destination\":\"/gallery/(..)gallery/:id\",\"has\":[{\"type\":\"header\",\"key\":\"Next-Url\",\"value\":\"\\\\/gallery(?:\\\\/(.*))?[\\\\/#\\\\?]?\"}]}]"
