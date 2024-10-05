@@ -1,23 +1,25 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { transporter } from '../../../utils/email';
-
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, subject, message } = await request.json();
+    const body = await request.json();
+    const { to, subject, text, html } = body;
 
-    if (!name || !email || !subject || !message) {
+    // Walidacja danych wejściowych
+    if (!to || !subject || (!text && !html)) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
       );
     }
 
+    // Wysyłanie e-maila
     const info = await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: 'recipient@example.com', // Replace with the actual recipient
-      subject: `New message from ${name}: ${subject}`,
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`,
+      from: process.env.EMAIL_FROM,
+      to,
+      subject,
+      text,
+      html,
     });
 
     return NextResponse.json(
