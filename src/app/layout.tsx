@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import "./globals.css";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import Footer from "components/Footer";
 import ParallaxBackground from "../components/parralaxBackground";
 export default function RootLayout({
   children,
@@ -26,10 +27,12 @@ export default function RootLayout({
             />
             <Navbar />
             <div className=" inset-0 h-full bg-transparent opacity-90" />
-            {/* Main content */} <ParallaxBackground />
+            {/* Main content */}
             <main className="flex flex-col items-center w-full pt-20">
               {children}
             </main>
+            {/* Footer content */}
+            <Footer />
           </div>
         </div>
       </body>

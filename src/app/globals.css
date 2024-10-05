@@ -37,11 +37,19 @@ li {
 @media (max-width: 640px) {
   :root{
     /* Define your custom variables here */
-    --primary-color: #4f46e5;
+    --primary-color: black;
     --secondary-color: #ec4899;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 79, 70, 229;
     --background-end-rgb: 236, 72, 153;
+  
+  
+  }
+  body{
+    align-items: center;
+    place-items: center;
+    justify-items: center;
+    display: grid;
   }
   /* sm breakpoint styles go here */
 }

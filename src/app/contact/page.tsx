@@ -1,65 +1,127 @@
 "use client";
-import React, { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 
-const ContactPage: React.FC = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+interface FormState {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+const initialState: FormState = {
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+};
+
+const ContactForm = () => {
+  const [formData, setFormData] = useState<FormState>(initialState);
+  const [status, setStatus] = useState<string>("");
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setStatus("loading");
+
+    try {
+      const response = await fetch("/api/email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      setStatus("error");
+    }
+  };
 
   return (
-    <div className="container mx-auto my-10 flex items-center justify-center min-h-screen">
-      <div className="bg-black border-2 border-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center">Contact Us</h1>
-        <form>
-          <div className="mb-4">
-            <label htmlFor="name" className="block mb-2 text-sm font-medium">
-              Name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block mb-2 text-sm font-medium">
-              Email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="message" className="block mb-2 text-sm font-medium">
-              Message:
-            </label>
-            <textarea
-              id="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-              className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
-              rows={4}
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
-          >
-            Send Message
-          </button>
-        </form>
+    <form
+      onSubmit={handleSubmit}
+      className="form-control w-full max-w-md mx-auto p-6 border-2 border-white bg-black shadow-lg rounded-lg"
+    >
+      <h2 className="text-2xl font-bold text-center mb-6">Contact Us</h2>
+      <div className="mb-4">
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Your Name"
+          required
+          className="input input-bordered w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
-    </div>
+      <div className="mb-4">
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Your Email"
+          required
+          className="input input-bordered w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          name="subject"
+          value={formData.subject}
+          onChange={handleChange}
+          placeholder="Subject"
+          required
+          className="input text-black input-bordered w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <div className="mb-4">
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="Your Message"
+          required
+          className="textarea text-black  textarea-bordered w-full h-32 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+      <button
+        type="submit"
+        disabled={status === "loading"}
+        className={`btn btn-primary w-full py-2 rounded-md text-white ${
+          status === "loading" ? "loading" : ""
+        }`}
+      >
+        {status === "loading" ? "Sending..." : "Send"}
+      </button>
+
+      {status === "error" && (
+        <p className="text-red-500 mt-2 text-center">
+          An error occurred while sending the message.
+        </p>
+      )}
+      {status === "success" && (
+        <p className="text-green-500 mt-2 text-center">
+          Message sent successfully!
+        </p>
+      )}
+    </form>
   );
 };
 
-export default ContactPage;
+export default ContactForm;
