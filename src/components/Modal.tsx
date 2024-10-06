@@ -1,48 +1,59 @@
 "use client";
 import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
+import { ReactNode } from "react";
 
-export default function Modal({ children }: { children: React.ReactNode }) {
-  const overlay = useRef(null);
-  const wrapper = useRef(null);
+interface ModalProps {
+  children: ReactNode;
+  size?: "sm" | "md" | "lg" | "xl" | "full";
+  onClose: () => void;
+}
+
+export default function Modal({ children, size = "md", onClose }: ModalProps) {
   const router = useRouter();
+  const sizeClasses = {
+    sm: "max-w-md",
+    md: "max-w-2xl",
+    lg: "max-w-4xl",
+    xl: "max-w-6xl",
+    full: "max-w-full",
+  };
 
-  const onDismiss = useCallback(() => {
-    router.back();
-  }, [router]);
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
-  const onClick: MouseEventHandler = useCallback(
-    (e) => {
-      if (e.target === overlay.current || e.target === wrapper.current) {
-        if (onDismiss) onDismiss();
-      }
-    },
-    [onDismiss, overlay, wrapper]
-  );
-
-  const onKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") onDismiss();
-    },
-    [onDismiss]
-  );
-
-  useEffect(() => {
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [onKeyDown]);
+  const handleMobileBottomClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onClose();
+    console.log("Mobile bottom area clicked");
+  };
 
   return (
     <div
-      ref={overlay}
-      className="fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto bg-black/60 p-10"
-      onClick={onClick}
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+      onClick={handleBackdropClick}
     >
       <div
-        ref={wrapper}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:w-10/12 md:w-8/12 lg:w-2/5 p-6"
+        className={`bg-transparent p-6 rounded-lg ${sizeClasses[size]} w-full mx-auto max-w-4xl`}
       >
-        {children}
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-white text-2xl hidden sm:block"
+        >
+          ×
+        </button>
+        <div className="flex flex-col items-center">{children}</div>
+        <div
+          className="mt-4 sm:hidden h-16 bg-gray-800 bg-opacity-50 cursor-pointer"
+          onClick={handleMobileBottomClick}
+        >
+          <span className="flex justify-center items-center h-full text-white">
+            Tap to close
+          </span>
+        </div>
       </div>
     </div>
   );

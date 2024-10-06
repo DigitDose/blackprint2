@@ -1,10 +1,10 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import "./globals.css";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import Footer from "components/Footer";
 import ParallaxBackground from "../components/parralaxBackground";
+
 export default function RootLayout({
   children,
 }: {
@@ -18,15 +18,19 @@ export default function RootLayout({
 
           <div className="relative z-10 flex flex-col items-center">
             {/* Header content */}
-            <Image
-              src="/images/image_no_bg.png"
-              alt="logo"
-              width={500}
-              height={200}
-              className="relative z-10"
-            />
+            <video
+              src="/videos/input.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              /* zwolnij troche nagranie "slow motion" */
+              className="relative z-10 w-full max-w-[500px] h-auto"
+            >
+              Your browser does not support the video tag.
+            </video>
             <Navbar />
-            <div className=" inset-0 h-full bg-transparent opacity-90" />
+            <div className="inset-0 h-full bg-transparent opacity-90" />
             {/* Main content */}
             <main className="flex flex-col items-center w-full pt-20">
               {children}

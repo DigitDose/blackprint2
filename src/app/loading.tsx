@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Loading() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="h-7 items-center justify-center min-h-screen bg-black">
       <div className="flex items-center space-x-2">
         <div
           className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-500"

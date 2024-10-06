@@ -42,22 +42,42 @@ li {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 79, 70, 229;
     --background-end-rgb: 236, 72, 153;
-  
-  
   }
-  body{
+  body,
+  html{
     align-items: center;
     place-items: center;
     justify-items: center;
     display: grid;
+    font-size: 14px;
   }
   /* sm breakpoint styles go here */
 }
+@media (max-width:320px)
+{
+  :root{
+    /* Define your custom variables here */
+    --primary-color: black;
+    --secondary-color: #ec4899;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 79, 70, 229;
+    --background-end-rgb: 236, 72, 153;
+  }
+  html,
+  body{
+    display: grid;
+    place-items: center;
+    align-items: center;
+    justify-items: center;
+    font-size: 12px;
+  }
+}
+
 /* Responsive design with Tailwind CSS */
 @media (min-width: 640px) {
   :root{
     /* Define your custom variables here */
-    --primary-color: #4f46e5;
+    --primary-color: #000000;
     --secondary-color: #ec4899;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 79, 70, 229;
@@ -68,7 +88,7 @@ li {
 @media (min-width: 768px) {
   :root{
     /* Define your custom variables here */
-    --primary-color: #0d00ff;
+    --primary-color: #000000;
     --secondary-color: #00ff15;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 79, 70, 229;
@@ -78,7 +98,7 @@ li {
 @media (min-width: 1024px) { 
    :root{
     /* Define your custom variables here */
-    --primary-color: #ffc400;
+    --primary-color: black;
     --secondary-color: #ec4899;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 79, 70, 229;
@@ -88,7 +108,7 @@ li {
 @media (min-width: 1280px) {
   :root{
     /* Define your custom variables here */
-    --primary-color: #4f46e5;
+    --primary-color: #000000;
     --secondary-color: #ec4899;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 79, 70, 229;
