@@ -3,12 +3,13 @@ import Navbar from "../components/Navbar";
 import "./globals.css";
 import dynamic from "next/dynamic";
 import Footer from "components/Footer";
-import ParallaxBackground from "../components/parralaxBackground";
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -24,7 +25,6 @@ export default function RootLayout({
               loop
               muted
               playsInline
-              /* zwolnij troche nagranie "slow motion" */
               className="relative z-10 w-full max-w-[500px] h-auto"
             >
               Your browser does not support the video tag.

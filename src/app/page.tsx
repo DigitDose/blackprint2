@@ -1,7 +1,14 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const HomePage: React.FC = () => {
+  const images = [
+    { src: "/images/3.jpg", alt: "Image 3", id: 1 },
+    { src: "/images/5.jpg", alt: "Image 5", id: 2 },
+    { src: "/images/16.jpg", alt: "Image 16", id: 3 },
+  ];
+
   return (
     <div className="min-h-screen w-full bg-black flex justify-center items-start">
       <div className="w-full max-w-2xl p-4 m-4 text-white space-y-4">
@@ -17,9 +24,16 @@ const HomePage: React.FC = () => {
         </h3>
         <p className="text-2xl text-center mb-4">What we offer:</p>
         <div className="flex flex-row justify-center items-center mb-4">
-          <Image src="/images/3.jpg" alt="logo" width={250} height={100} />
-          <Image src="/images/5.jpg" alt="logo" width={250} height={100} />
-          <Image src="/images/16.jpg" alt="logo" width={250} height={100} />
+          {images.map((img) => (
+            <Link
+              key={img.id}
+              href={`/?image=${img.id}`}
+              as={`/image/${img.id}`}
+              scroll={false}
+            >
+              <Image src={img.src} alt={img.alt} width={250} height={100} />
+            </Link>
+          ))}
         </div>
         <h3 className="text-2xl mb-1">Screen Printing</h3>
         <ol>
@@ -57,7 +71,7 @@ const HomePage: React.FC = () => {
         </ul>
         <p className="text-pretty">
           Gildan, Fruit of The Loom, Sol's, JHK, Russell, American Apparel,
-          Buildyourbrand, Malfini, Stedmann, B&E и многие другие.
+          Buildyourbrand, Malfini, Stedmann, B&E і многие другие.
         </p>
         <div className="border border-white"> </div>
         <h3 className="text-2xl">Why choose us:</h3>

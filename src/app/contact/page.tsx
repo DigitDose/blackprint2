@@ -39,14 +39,15 @@ const ContactForm = () => {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
-
       if (response.ok) {
+        const result = await response.json();
         setStatus("success");
+        setFormData(initialState); // Resetuj formularz po udanym wysłaniu
       } else {
         setStatus("error");
       }
     } catch (error) {
+      console.error("Error sending email:", error);
       setStatus("error");
     }
   };

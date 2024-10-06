@@ -23,12 +23,21 @@ export type Product = {
   name: string;
   category: 'cap' | 'tshirt' | 'hoodie';
   image: StaticImageData;
+  videoUrl?: string; // Dodaj to pole
   description: string;
   price: number;
 };
 
 const galleryProducts: Product[] = [
-  { id: 1, name: "Classic Cap", category: "cap", image: cap1, description: "A timeless cap design for everyday wear.", price: 19.99 },
+  { 
+    id: 1, 
+    name: "Classic Cap", 
+    category: "cap", 
+    image: cap1, 
+    videoUrl: "/videos/classic_cap.mp4", // Dodaj to pole
+    description: "A timeless cap design for everyday wear.", 
+    price: 19.99 
+  },
   { id: 2, name: "Sports Cap", category: "cap", image: cap2, description: "Perfect for athletes and sports enthusiasts.", price: 24.99 },
   { id: 3, name: "Vintage Cap", category: "cap", image: cap3, description: "Retro-inspired cap with a modern twist.", price: 22.99 },
   { id: 4, name: "Snapback Cap", category: "cap", image: cap4, description: "Adjustable snapback for a perfect fit.", price: 21.99 },
